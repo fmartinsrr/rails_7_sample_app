@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Username</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -11,6 +12,7 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.username %></td>
+        <td><%= link_to 'Details', user %></td>
       </tr>
     <% end %>
   </tbody>

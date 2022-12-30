@@ -1,0 +1,13 @@
+<h1>User Details</h1>
+
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+
+<p>
+  <strong>Date created:</strong>
+  <%= @user.created_at.strftime("%FT%T") %>
+</p>
+
+<%= link_to 'Back', users_path %>
