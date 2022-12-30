@@ -1,0 +1,8 @@
+<% if model_object.errors.any? %>
+    <h2>Failed to save <%= model_name %>:</h2>
+    <ul>
+    <% model_object.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
+    </ul>
+<% end %>

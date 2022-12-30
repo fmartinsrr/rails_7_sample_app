@@ -1,24 +1,8 @@
 <h1>Edit User</h1>
 
-<% if @user.errors.any? %>
-    <h2>Failed to create new user:</h2>
-    <ul>
-    <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-    <% end %>
-    </ul>
-<% end %>
+<%= render 'shared/errors', model_object: @user, model_name: "user" %>
 
-<%= form_with(model: @user) do |user_form| %>
-    <div class="field">
-        <%= user_form.label :username %>
-        <%= user_form.text_field :username %>
-    </div>
-
-    <div class="actions">
-        <%= user_form.submit %>
-    </div>
-<% end %>
+<%= render 'form' %>
 
 <br>
 
