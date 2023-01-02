@@ -26,6 +26,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def update
+		@article.update_count += 1
 		if @article.update(article_params)
 			redirect_to articles_url
 		else
