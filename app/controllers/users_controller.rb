@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:show, :edit, :update]
+	before_action :set_user, only: [:show, :edit, :update, :destroy]
 
 	def index
   		@users = User.all
@@ -29,6 +29,12 @@ class UsersController < ApplicationController
 			redirect_to users_url
 		else
 			render 'edit'
+		end
+	end
+
+	def destroy
+		if @user.destroy
+			redirect_to users_url
 		end
 	end
 
