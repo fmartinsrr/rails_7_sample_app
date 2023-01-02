@@ -5,6 +5,10 @@ class ArticlesController < ApplicationController
   		@articles = Article.all
 	end
 
+	def live
+    @articles = Article.where(status: :live)
+	end
+
 	def show
 	end
 
