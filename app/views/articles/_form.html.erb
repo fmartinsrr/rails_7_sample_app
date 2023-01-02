@@ -4,10 +4,22 @@
         <%= article_form.text_field :title %>
     </div>
 
+    <br>
+
     <div class="field">
         <%= article_form.label :description %>
-        <%= article_form.text_field :description %>
+        <br>
+        <%= article_form.text_area :description %>
     </div>
+
+    <br>
+
+    <div class="field">
+        <%= article_form.label :status %>
+        <%= select(:article, :status, options_for_select([['Draft', :draft], ['Pending', :pending], ['Live', :live]], @article.status)) %>
+    </div>
+
+    <br>
 
     <div class="actions">
         <%= article_form.submit %>
