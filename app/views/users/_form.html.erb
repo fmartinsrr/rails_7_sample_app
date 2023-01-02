@@ -4,6 +4,11 @@
         <%= user_form.text_field :username %>
     </div>
 
+    <div class="field">
+        <%= user_form.label :status %>
+        <%= select(:user, :status, options_for_select([['Enabled', :enable], ['Disabled', :disable]], @user.status)) %>
+    </div>
+
     <div class="actions">
         <%= user_form.submit %>
     </div>

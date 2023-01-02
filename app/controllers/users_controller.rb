@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
   def new
 		@user = User.new
+		@user.status = :enable
   end
 
   def create
@@ -45,7 +46,7 @@ class UsersController < ApplicationController
 	end
 
 	def user_params
-		params.require(:user).permit(:username)
+		params.require(:user).permit(:username, :status)
 	end
 
 end
