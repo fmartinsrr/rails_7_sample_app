@@ -21,6 +21,13 @@
 
     <br>
 
+    <div class="field">
+        <%= article_form.label :user %>
+        <%= article_form.collection_select(:user_id, User.all, :id, :username, {:prompt => "Please select a user"} )%>
+    </div>
+
+    <br>
+
     <div class="actions">
         <%= article_form.submit %>
     </div>
