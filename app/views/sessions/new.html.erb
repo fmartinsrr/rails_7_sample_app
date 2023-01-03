@@ -1,0 +1,17 @@
+<h1>Log in</h1>
+
+<%= form_with(scope: :session, url: login_path, data: {turbo: false}) do |login_form| %>
+    <div class="field">
+        <%= login_form.label :email %>
+        <%= login_form.email_field :email %>
+    </div>
+
+    <div class="field">
+        <%= login_form.label :password %>
+        <%= login_form.password_field :password %>
+    </div>
+
+    <div class="actions">
+        <%= login_form.submit "Log in" %>
+    </div>
+<% end %>
