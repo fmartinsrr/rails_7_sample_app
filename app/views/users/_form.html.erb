@@ -5,6 +5,16 @@
     </div>
 
     <div class="field">
+        <%= user_form.label :email %>
+        <%= user_form.email_field :email %>
+    </div>
+
+    <div class="field">
+        <%= user_form.label :password %>
+        <%= user_form.password_field :password %>
+    </div>
+
+    <div class="field">
         <%= user_form.label :status %>
         <%= select(:user, :status, options_for_select([['Enabled', :enable], ['Disabled', :disable]], @user.status)) %>
     </div>
