@@ -1,4 +1,4 @@
-<%= form_with(model: @article) do |article_form| %>
+<%= form_with(model: @article, data: {turbo: false}) do |article_form| %>
     <div class="field">
         <%= article_form.label :title %>
         <%= article_form.text_field :title %>

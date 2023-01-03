@@ -16,7 +16,7 @@
         <td><%= article.update_count %></td>
         <td><%= link_to 'Details', article %></td>
         <td><%= link_to 'Edit', edit_article_path(article) %></td>
-        <td><%= link_to 'Delete', article_path(article), method: :delete, data: { confirm: 'Delete article?' } %></td>
+        <td><%= link_to 'Delete', article, data: { turbo_method: :delete, turbo_confirm: 'Delete article?' } %></td>
       </tr>
     <% end %>
   </tbody>
