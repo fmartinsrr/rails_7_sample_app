@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def live
-    @articles = Article.where(status: :live)
+    @articles = Article.filter_by_status(:live)
 	end
 
 	def show

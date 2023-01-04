@@ -4,4 +4,6 @@ class Article < ApplicationRecord
   has_many :tags, through: :article_tags
   validates :title, presence: true, length:  { minimum: 1, maximum: 20 }
   enum status: [:draft, :pending, :live]
+
+  scope :filter_by_status, -> (status)  { where status: status }
 end
