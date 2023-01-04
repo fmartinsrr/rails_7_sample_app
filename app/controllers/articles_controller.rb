@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
 	before_action :set_article, only: [:show, :edit, :update, :destroy]
+	before_action :require_login, only: [:new, :edit, :destroy]
 
 	def index
   		@articles = Article.all
@@ -53,5 +54,12 @@ class ArticlesController < ApplicationController
 	def article_params
 		params.require(:article).permit(:title, :description, :status, :user_id)
 	end
+
+  def require_login
+    if !logged_in?
+      flash[:warning] = "To create a new article you need to log in"
+      redirect_to login_path
+    end
+  end
 
 end
