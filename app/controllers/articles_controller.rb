@@ -4,6 +4,7 @@ class ArticlesController < ApplicationController
 
 	def index
     status_symbol = params[:status].to_sym if params[:status] != nil
+    status_symbol ||= params[:article_status][:status].to_sym if params[:article_status] && params[:article_status][:status]
     @status = status_symbol if Article.statuses.include?(status_symbol)
     @articles = @status != nil ? Article.filter_by_status(@status) : Article.all
 	end

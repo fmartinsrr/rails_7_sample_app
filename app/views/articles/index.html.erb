@@ -1,5 +1,10 @@
 <h1><%= @status ? @status.capitalize : "All" %> Articles</h1>
 
+<%= form_with scope: :article_status, url: articles_path, method: :get do |filter_form| %>
+  <%= select(:article_status, :status, options_for_select([['No filter', :no_filter], ['Draft', :draft], ['Pending', :pending], ['Live', :live]], @status)) %>
+  <%= filter_form.submit "Filter" %>
+<% end %>
+
 <%= render 'articles_list' %>
 
 <br>
