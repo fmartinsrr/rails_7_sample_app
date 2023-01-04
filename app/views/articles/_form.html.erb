@@ -28,6 +28,13 @@
 
     <br>
 
+    <div class="field">
+        <%= article_form.label :tags %>
+        <%= article_form.text_field :tags, value: @article.tags.map{ |tag| tag.name }.join(",") %>
+    </div>
+
+    <br>
+
     <div class="actions">
         <%= article_form.submit %>
     </div>

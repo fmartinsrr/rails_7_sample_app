@@ -22,7 +22,8 @@ class ArticlesController < ApplicationController
   end
 
   def create
-		@article = Article.new(article_params)
+		@article = Article.new(article_params.except(:tags))
+		update_article_tags(@article, params[:article][:tags])
 		if @article.save
 			redirect_to articles_url
 		else
@@ -32,12 +33,21 @@ class ArticlesController < ApplicationController
 
 	def update
 		@article.update_count += 1
-		if @article.update(article_params)
+		update_article_tags(@article, params[:article][:tags])
+		if @article.update(article_params.except(:tags))
 			redirect_to articles_url
 		else
 			render 'edit'
 		end
 	end
+
+  def update_article_tags(article, tags_names)
+    article.article_tags.destroy_all
+    tags_names = tags_names.strip.split(',')
+    article.tags = tags_names.map { |name|
+        Tag.find_or_create_by(name: name)
+    }
+  end
 
 	def destroy
 		if @article.destroy
@@ -52,7 +62,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def article_params
-		params.require(:article).permit(:title, :description, :status, :user_id)
+		params.require(:article).permit(:title, :description, :status, :user_id, :tags)
 	end
 
   def require_login

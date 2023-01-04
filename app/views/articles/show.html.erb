@@ -10,4 +10,11 @@
   <%= @article.created_at.strftime("%FT%T") %>
 </p>
 
+<p>
+  <strong>Tags:</strong>
+  <% @article.tags.each do | tag| %>
+    <span><%= tag.name %></span>
+  <% end %>
+</p>
+
 <%= link_to 'Back', articles_path %>
