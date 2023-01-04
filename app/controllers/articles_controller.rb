@@ -3,7 +3,9 @@ class ArticlesController < ApplicationController
 	before_action :require_login, only: [:new, :edit, :destroy]
 
 	def index
-  		@articles = Article.all
+    status_symbol = params[:status].to_sym if params[:status] != nil
+    @status = status_symbol if Article.statuses.include?(status_symbol)
+    @articles = @status != nil ? Article.filter_by_status(@status) : Article.all
 	end
 
 	def live
