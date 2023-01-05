@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   def create
 		@user = User.new(user_params)
 		if @user.save
+			UserNotifierMailer.send_signup_email(@user).deliver
 			redirect_to users_url
 		else
 			render 'new'
