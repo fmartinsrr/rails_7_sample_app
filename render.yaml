@@ -23,7 +23,7 @@ services:
     name: rails-web
     env: ruby
     region: ohio
-    buildCommand: bundle install;yarn install;
+    buildCommand: bundle install;yarn install;rails assets:precompile;
     startCommand: bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RACK_ENV:-production}
     envVars:
       - key: REDIS_URL
