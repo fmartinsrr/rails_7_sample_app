@@ -4,9 +4,23 @@ class ArticlesController < ApplicationController
 
 	def index
     status_symbol = params[:status].to_sym if params[:status] != nil
-    status_symbol ||= params[:article_status][:status].to_sym if params[:article_status] && params[:article_status][:status]
+    status_symbol ||= params[:article_status][:status].to_sym if params[:article_status].present? && params[:article_status][:status].present?
     @status = status_symbol if Article.statuses.include?(status_symbol)
-    @articles = @status != nil ? Article.filter_by_status(@status) : Article.all
+    @filter_user = params[:article_status][:user_id] if params[:article_status].present? && params[:article_status][:user_id].present?
+    @article_users = User.joins(:articles).distinct
+
+    @articles = if @status != nil
+      if @filter_user != nil && @filter_user != ""
+        #Article.filter_by_status_and_user(@status, @filter_user)
+        Article.filter_by_status(@status).filter_by_user(@filter_user)
+      else
+        Article.filter_by_status(@status)
+      end
+    elsif @filter_user != nil && @filter_user != ""
+      Article.filter_by_user(@filter_user)
+    else
+      Article.all
+    end
 	end
 
 	def live

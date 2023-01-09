@@ -1,7 +1,12 @@
 <h1><%= @status ? @status.capitalize : "All" %> Articles</h1>
 
 <%= form_with scope: :article_status, url: articles_path, method: :get do |filter_form| %>
+  <%= filter_form.label "Status" %>
   <%= select(:article_status, :status, options_for_select([['No filter', :no_filter], ['Draft', :draft], ['Pending', :pending], ['Live', :live]], @status)) %>
+
+  <%= filter_form.label :user %>
+  <%= filter_form.collection_select(:user_id, @article_users, :id, :username, {:include_blank => "No filter", selected: @filter_user} )%>
+  
   <%= filter_form.submit "Filter" %>
 <% end %>
 

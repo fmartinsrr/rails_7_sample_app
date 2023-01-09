@@ -6,4 +6,6 @@ class Article < ApplicationRecord
   enum status: [:draft, :pending, :live]
 
   scope :filter_by_status, -> (status)  { where status: status }
+  scope :filter_by_user, -> (user_id)  { where user_id: user_id }
+  scope :filter_by_status_and_user, -> (status, user_id)  { where status: status, user_id: user_id }
 end
