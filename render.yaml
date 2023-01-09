@@ -19,12 +19,14 @@ services:
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
+      - key: RAILS_ENV
+        value: production
   - type: web
     name: rails-web
     env: ruby
     region: ohio
-    buildCommand: bundle install;yarn install;
-    startCommand: bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RACK_ENV:-production}
+    buildCommand: bundle install;yarn install;bundle exec rails assets:precompile -e ${RAILS_ENV};
+    startCommand: bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RAILS_ENV}
     envVars:
       - key: REDIS_URL
         fromService:
@@ -33,3 +35,5 @@ services:
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
+      - key: RAILS_ENV
+        value: production
