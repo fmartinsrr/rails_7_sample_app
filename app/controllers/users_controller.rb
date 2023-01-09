@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def create
 		@user = User.new(user_params)
 		if @user.save
-			#WelcomeUserJob.perform_async(@user.id)
+			WelcomeUserJob.perform_async(@user.id)
 			redirect_to users_url
 		else
 			render 'new'
