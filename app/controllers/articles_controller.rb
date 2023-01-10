@@ -43,11 +43,13 @@ class ArticlesController < ApplicationController
 	end
 
 	def edit
+    @need_reload = false
 	end
 
   def new
 		@article = Article.new
     @article.status = :draft
+    @need_reload = false
   end
 
   def create
@@ -61,13 +63,25 @@ class ArticlesController < ApplicationController
 	end
 
 	def update
-		@article.update_count += 1
-		update_article_tags(@article, params[:article][:tags])
-		if @article.update(article_params.except(:tags))
-			redirect_to articles_url
-		else
-			render 'edit'
-		end
+    @need_reload = false
+    did_succeed = false
+    
+    Article.transaction do 
+      @article.update_count += 1
+      update_article_tags(@article, params[:article][:tags])
+      did_succeed = @article.update(article_params.except(:tags))
+    end
+
+    if did_succeed
+      redirect_to articles_url
+    else
+      render 'edit'
+    end
+
+  rescue ActiveRecord::StaleObjectError => e
+    flash[:notice] = "The article was modified while you were editing it. Please retry..."
+    @need_reload = true
+    render 'edit'
 	end
 
   def update_article_tags(article, tags_names)
@@ -91,7 +105,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def article_params
-		params.require(:article).permit(:title, :description, :status, :user_id, :tags)
+		params.require(:article).permit(:title, :description, :status, :user_id, :tags, :update_count)
 	end
 
   def require_login

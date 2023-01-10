@@ -35,7 +35,15 @@
 
     <br>
 
+    <div class="field">
+        <%= article_form.hidden_field :update_count, value: @article.update_count %>
+    </div>
+
     <div class="actions">
         <%= article_form.submit %>
     </div>
+<% end %>
+
+<% if @need_reload %>
+    <%= link_to 'Reload Form', edit_article_path(@article) %>
 <% end %>
