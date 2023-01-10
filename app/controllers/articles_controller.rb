@@ -14,10 +14,11 @@ class ArticlesController < ApplicationController
     @filter_tags = params[:article_status][:tags_id].compact_blank if params[:article_status].present? && params[:article_status][:tags_id].present?
     @article_tags = Tag.joins(:articles).distinct
 
-    @articles = Article.includes(:user).includes(:tags).all
+    @articles = Article.all
     @articles = @articles.filter_by_status(@status) unless @status.nil?
     @articles = @articles.filter_by_tag(@filter_tags) unless @filter_tags.nil? || @filter_tags.empty?
     @articles = @articles.filter_by_user(@filter_user) unless @filter_user.blank?
+    @articles = @articles.includes(:user).includes(:article_tags).includes(:tags)
 
     # NON OPTIMIZED:
     #@articles = if @status != nil
