@@ -5,7 +5,7 @@
   <%= select(:article_status, :status, options_for_select([['No filter', :no_filter], ['Draft', :draft], ['Pending', :pending], ['Live', :live]], @status)) %>
 
   <%= filter_form.label :tag %>
-  <%= filter_form.collection_select(:tag_id, @article_tags, :id, :name, {:include_blank => "No filter", selected: @filter_tag} )%>
+  <%= filter_form.collection_select(:tags_id, @article_tags, :id, :name, {:include_blank => "No filter", selected: @filter_tags}, {multiple: true} )%>
 
   <%= filter_form.label :user %>
   <%= filter_form.collection_select(:user_id, @article_users, :id, :username, {:include_blank => "No filter", selected: @filter_user} )%>
