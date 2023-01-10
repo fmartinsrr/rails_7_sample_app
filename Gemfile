@@ -78,3 +78,5 @@ group :test do
 end
 
 gem 'dotenv-rails', groups: [:development, :test]
+
+gem 'bootstrap', '~> 5.2.3'
