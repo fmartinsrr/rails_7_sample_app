@@ -67,7 +67,6 @@ class ArticlesController < ApplicationController
     did_succeed = false
     
     Article.transaction do 
-      @article.update_count += 1
       update_article_tags(@article, params[:article][:tags])
       did_succeed = @article.update(article_params.except(:tags))
     end
