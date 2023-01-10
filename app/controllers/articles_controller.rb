@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
     @filter_tag = params[:article_status][:tag_id] if params[:article_status].present? && params[:article_status][:tag_id].present?
     @article_tags = Tag.joins(:articles).distinct
 
-    @articles = Article.all
+    @articles = Article.includes(:user).includes(:tags).all
     @articles = @articles.filter_by_status(@status) unless @status.nil?
     @articles = @articles.filter_by_tag(@filter_tag) unless @filter_tag.blank?
     @articles = @articles.filter_by_user(@filter_user) unless @filter_user.blank?
