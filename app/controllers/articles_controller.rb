@@ -9,18 +9,27 @@ class ArticlesController < ApplicationController
     @filter_user = params[:article_status][:user_id] if params[:article_status].present? && params[:article_status][:user_id].present?
     @article_users = User.joins(:articles).distinct
 
-    @articles = if @status != nil
-      if @filter_user != nil && @filter_user != ""
-        #Article.filter_by_status_and_user(@status, @filter_user)
-        Article.filter_by_status(@status).filter_by_user(@filter_user)
-      else
-        Article.filter_by_status(@status)
-      end
-    elsif @filter_user != nil && @filter_user != ""
-      Article.filter_by_user(@filter_user)
-    else
-      Article.all
-    end
+    @filter_tag = params[:article_status][:tag_id] if params[:article_status].present? && params[:article_status][:tag_id].present?
+    @article_tags = Tag.joins(:articles).distinct
+
+    @articles = Article.all
+    @articles = @articles.filter_by_status(@status) unless @status.nil?
+    @articles = @articles.filter_by_tag(@filter_tag) unless @filter_tag.blank?
+    @articles = @articles.filter_by_user(@filter_user) unless @filter_user.blank?
+
+    # NON OPTIMIZED:
+    #@articles = if @status != nil
+    #  if @filter_user != nil && @filter_user != ""
+    #    #Article.filter_by_status_and_user(@status, @filter_user)
+    #    Article.filter_by_status(@status).filter_by_user(@filter_user)
+    #  else
+    #    Article.filter_by_status(@status)
+    #  end
+    #elsif @filter_user != nil && @filter_user != ""
+    #  Article.filter_by_user(@filter_user)
+    #else
+    #  Article.all
+    #end
 	end
 
 	def live
