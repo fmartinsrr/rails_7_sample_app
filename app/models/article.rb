@@ -1,4 +1,18 @@
+module ArticleSlug
+  def to_param
+    "#{id}-#{slug.nil? ? title.to_s.parameterize : slug }"
+  end
+
+  private
+  def set_slug
+    self.slug = title.to_s.parameterize
+  end 
+end
+
 class Article < ApplicationRecord
+  include ArticleSlug
+  after_validation :set_slug, only: [:create, :update]
+
   self.locking_column = :update_count
 
   belongs_to :user

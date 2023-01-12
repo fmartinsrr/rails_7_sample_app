@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
 
   def assign_to_article_if_needed(comment, article_id)
     if article_id
-      article = User.find(article_id)
+      article = Article.find(article_id)
       comment.commentable = article
     end
   end
