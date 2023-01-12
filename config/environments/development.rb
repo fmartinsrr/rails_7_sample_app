@@ -77,5 +77,6 @@ Rails.application.configure do
     address: 'mailcatcher',
     port: 1025
   }
+  config.action_mailer.default_url_options = { host: '127.0.0.1:3000' }
 
 end
