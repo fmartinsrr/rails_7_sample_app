@@ -5,7 +5,12 @@ Rails.application.routes.draw do
   root "welcome#index"
 
   resources :users #, only: [:index, :new, :create, :show, :edit, :update, :destroy]
-  resources :articles
+  
+  resources :articles do
+    collection do 
+      get :live
+    end
+  end
 
   get 'live_articles', to: 'articles#live'
 

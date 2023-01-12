@@ -1,9 +1,11 @@
 class Article < ApplicationRecord
   self.locking_column = :update_count
-  
+
   belongs_to :user
   has_many :article_tags
   has_many :tags, through: :article_tags
+  has_many :comments, as: :commentable
+
   validates :title, presence: true, length:  { minimum: 1, maximum: 20 }
   enum status: [:draft, :pending, :live]
 
