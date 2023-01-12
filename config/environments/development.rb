@@ -74,7 +74,7 @@ Rails.application.configure do
   # $ mailhog
   config.action_mailer.perform_deliveries = true
   config.action_mailer.smtp_settings = {
-    address: 'localhost',
+    address: 'mailcatcher',
     port: 1025
   }
 

@@ -4,6 +4,7 @@ services:
     command: bundle exec sidekiq
     volumes:
       - .:/app
+      - bundler_gems:/usr/local/bundle/
     depends_on:
       - db
       - redis
