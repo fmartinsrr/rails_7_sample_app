@@ -14,4 +14,7 @@ class User < ApplicationRecord
             format: { with: VALID_EMAIL_REGEX }
 
   has_secure_password
+
+  scope :active_users, -> { where status: :enable }
+  scope :without_login_since, -> (since_date)  { where("last_login < ?", since_date) }
 end
