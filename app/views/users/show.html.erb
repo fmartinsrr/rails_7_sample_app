@@ -10,4 +10,17 @@
   <%= @user.created_at.strftime("%FT%T") %>
 </p>
 
+<% @user.comments.each do | comment| %>
+<p>  
+  <span><%= comment.comment %></span>
+  <%= link_to 'Delete', comment, data: { turbo_method: :delete, turbo_confirm: 'Delete comment?' } %>
+</p>
+<% end %>
+
+<br>
+
+<%= link_to 'New Comment', new_comment_path(:user_id => @user.id) %>
+
+<br>
+
 <%= link_to 'Back', users_path %>

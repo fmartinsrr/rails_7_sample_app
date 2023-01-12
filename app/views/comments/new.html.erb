@@ -1,0 +1,27 @@
+<h1>New Comment</h1>
+
+<%= render 'shared/errors', model_object: @comment, model_name: "new comment" %>
+
+<%= form_with(model: @comment, data: {turbo: false}) do |comment_form| %>
+    <div class="field">
+        <%= comment_form.label :comment %>
+        <br>
+        <%= comment_form.text_area :comment %>
+    </div>
+
+    <% if @user_id %>
+      <%= comment_form.hidden_field :user_id, value: @user_id %>
+    <% end %>
+
+    <% if @article_id %>
+      <%= comment_form.hidden_field :article_id, value: @article_id %>
+    <% end %>
+
+    <div class="actions">
+        <%= comment_form.submit %>
+    </div>
+<% end %>
+
+<br>
+
+<%= link_to 'Back', request.referer %>

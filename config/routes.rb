@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :comments , only: [:new, :create, :destroy]
+
   get 'live_articles', to: 'articles#live'
 
   get 'login', to: 'sessions#new'
