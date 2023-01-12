@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_12_142233) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_12_164012) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +55,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_12_142233) do
     t.string "email"
     t.string "password_digest"
     t.datetime "last_login", default: -> { "CURRENT_TIMESTAMP" }
+    t.string "image_public_id"
+    t.string "image_public_url"
   end
 
 end
