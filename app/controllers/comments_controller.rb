@@ -34,6 +34,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     if @comment.destroy
+      # We should check if the referer has the same domain.
 			redirect_to request.referer
 		end
   end

@@ -31,9 +31,8 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		if !session[:user_page].nil? && session[:user_page] == :user_details.to_s
-			user_param = params[:user]
-			if !user_param.nil? && !user_param[:picture].nil?
+		if !session[:user_page].nil? && session[:user_page] == :user_details.to_s #Use hidden fields instead.
+			if !params.dig[:user,:picture].blank?
 				result = Cloudinary::Uploader.upload(params[:user][:picture], options = {})
 				@user.update(image_public_id: result["public_id"], image_public_url: result["url"])
 				redirect_to user_path(@user)
