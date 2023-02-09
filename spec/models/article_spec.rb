@@ -5,6 +5,13 @@ RSpec.describe Article, type: :model do
     described_class.new(title: "Title1")
   }
 
+  describe "associations" do
+    it { should belong_to(:user) }
+    it { should have_many(:article_tags) }
+    it { should have_many(:tags) }
+    it { should have_many(:comments) }
+  end
+
   context 'validations' do
     context 'with user' do
       let(:user) {

@@ -6,7 +6,12 @@ RSpec.describe User, type: :model do
                         email: "user@example.com",
                         password_digest: "pwd")
   }
-  
+
+  describe "associations" do
+    it { should have_many(:articles) }
+    it { should have_many(:comments) }
+  end
+
   describe 'validations' do
     it "is valid with valid attributes" do
       expect(subject).to be_valid
